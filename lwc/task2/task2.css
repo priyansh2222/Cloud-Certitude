@@ -1,0 +1,11 @@
+.header{
+    font-size: 25px;
+}
+table {
+    table-layout: fixed ;
+    width: 100% ;
+  }
+td {
+    padding: 0 15px;
+    width: 50%;
+  }

@@ -1,0 +1,43 @@
+<template>
+<lightning-card >
+    <div style="padding: 15px;">
+    <table style="width: 100%;">
+        <tr>
+            <td>
+            <div style="font-size: 25px;">Select Record Name</div>
+                </td>
+                <td><div style="font-size: 25px;">Select {selectedObj} </div>
+                    </td></tr></tr>
+                    <tr>
+                        <td>
+            <select id="s1"  class="slds-select" name = "optionSelect" onchange={onchangeClick} >
+                    <template for:each={listOfObjNames} for:item="item">
+                <option value={item.fieldName}  key={item.fieldName}>{item.label}</option>                    
+            </template>
+            </select>      
+            </td>
+            <td>
+            <select id="s2"  class="slds-select" name = "optionSelect" onchange={handleChange} multiple>
+                <template for:each={listOfFields} for:item="item">
+            <option value={item.fieldName} data-item={item.label}  key={item.label}>{item.label}</option>                    
+        </template>
+        </select> 
+            </td>        
+        </tr>
+        <tr>
+            <td>
+                <lightning-input type="date"  value={startDate} onchange={startDateHandler}></lightning-input>
+            </td>
+            <td>
+                <lightning-input type="date"  value={endDate} onchange={endDataHandler}></lightning-input>
+            </td>
+        </tr>
+    </table><br/>
+    <lightning-button style="padding: 10px;" variant="Neutral" onclick={handleSearch} value="Serach Data" label="Search here "></lightning-button><br/>
+    <template if:true={data} >
+        <lightning-button variant="brand" value="download" label="download csv" onclick={downloadCsv} ></lightning-button>
+    </template>
+    <lightning-datatable columns={cols} data={data} key-field="Id"></lightning-datatable>
+    </div>
+</lightning-card> 
+</template>

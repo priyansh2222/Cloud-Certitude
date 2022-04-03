@@ -1,0 +1,64 @@
+public with sharing class UploadCsvController {
+    @AuraEnabled
+    public static list<Account> csvFileRead(Id contentDocumentId){
+        list<Account> accountInsertList = new list<Account>();
+        if(contentDocumentId != null) {
+            
+            // Fetch File Data based on the basic of document id 
+            ContentVersion contentVersionObj = [SELECT Id, VersionData FROM ContentVersion WHERE ContentDocumentId =:contentDocumentId];
+            // split the file data
+            list<String> csvRecordsList = contentVersionObj.VersionData.toString().split('\n');
+                System.debug(csvRecordsList);
+            for(Integer i = 1; i < csvRecordsList.size(); i++){
+                Account accountObj = new Account();
+                list<String> csvRowData = csvRecordsList[i].split(',');
+                System.debug('csvRowData====> '+csvRowData);
+                accountObj.Name = csvRowData[0]; // accName
+                accountObj.AccountSource = csvRowData[1];
+                accountObj.Site = csvRowData[2];
+                accountObj.Type = csvRowData[3];
+                accountObj.Website = csvRowData[4];
+                accountInsertList.add(accountObj);
+            }
+
+            try{    
+                if(!accountInsertList.isEmpty()) {
+                    return accountInsertList;    
+                }
+                
+            }
+            catch (Exception ex) {
+                throw new AuraHandledException(ex.getMessage());
+            } 
+        }
+         return accountInsertList;
+    }
+    @AuraEnabled
+    public static string insertAccounts(String str){
+        try {
+            List<Account> listOfAccount = (list<Account>)JSON.deserialize(str,List<Account>.class);
+            if(listOfAccount.size()>0){
+                insert listOfAccount;
+            }
+            return 'success';
+        } catch (Exception e) {
+           
+            throw new AuraHandledException(e.getMessage());
+        }
+    }
+    @AuraEnabled
+    public static string replaceFile(String recordId){
+        try {
+            ContentVersion contentVersionObj = [SELECT Id, VersionData FROM ContentVersion WHERE ContentDocumentId =:recordId];
+          
+            if(contentVersionObj != null){
+               // delete contentVersionObj;
+            }
+            return 'success';
+        } catch (Exception e) {
+           
+            throw new AuraHandledException(e.getMessage());
+        }
+    }
+}
+

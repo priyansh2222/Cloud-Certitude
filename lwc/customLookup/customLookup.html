@@ -1,0 +1,18 @@
+<template>
+    <lightning-card>
+        <div style="padding: 30px;">
+    <lightning-input placeholder="Search Account" value={inputValue} onchange={changeHandler}   ></lightning-input>
+    <br/>
+   <!-- <lightning-datatable key-field="Id" columns={cols} data={records}></lightning-datatable>-->
+    <template for:each={records} for:item="item" for:index="index">
+        <div key={item.id} style="padding-left:10px;padding-top:10px;" onclick={selectAccount} >
+           <span class="slds-icon_container slds-icon-utility-search slds-input__icon iconheight">
+                <lightning-icon value={index} class="slds-icon slds-icon slds-icon_small slds-icon-text-default" icon-name="standard:account" size="x-small"  style="padding-right: 10px;"></lightning-icon>
+                {item.Name}
+            </span>    
+                
+        </div>
+    </template>
+</div>
+    </lightning-card>
+</template>

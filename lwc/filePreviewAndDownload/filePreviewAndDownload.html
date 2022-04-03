@@ -1,0 +1,49 @@
+<template>
+<lightning-card title="Upload Bulk files" style="width: 100%;">
+  
+  <lightning-file-upload  
+  label="Upload New File"
+  name="fileUploader"
+  accept={accept}
+  record-id={recordId}
+  onuploadfinished={handleUploadFinished}
+  multiple>
+</lightning-file-upload><br/>
+<div class="slds-grid slds-wrap slds-box" style="user-select: auto;" >
+          
+<div class="slds-col slds-large-size_5-of-12 slds-medium-size_1-of-12 slds-size_1-of-12" style="user-select: auto;">
+  <span style="user-select: auto;"><strong> Name </strong></span>
+</div>
+<div class="slds-col slds-large-size_3-of-12 slds-medium-size_1-of-12 slds-size_1-of-12" style="user-select: auto;">
+  <span style="user-select: auto;"><strong>Size </strong></span>
+</div>
+<div class="slds-col slds-large-size_2-of-12 slds-medium-size_1-of-12 slds-size_1-of-12" style="user-select: auto;">
+  <span style="user-select: auto;"><strong>Download Action</strong></span>
+</div>
+<div class="slds-col slds-large-size_2-of-12 slds-medium-size_1-of-12 slds-size_1-of-12" style="user-select: auto;">
+  <span style="user-select: auto;"><strong>Delete Action</strong></span>
+</div>
+
+</div>
+
+    <template for:each={fileData} for:item="item">
+        <div class="slds-grid slds-wrap slds-box" style="user-select: auto;" key={item.id}>
+          
+            <div class="slds-col slds-large-size_5-of-12 slds-medium-size_1-of-12 slds-size_1-of-12" style="user-select: auto;">
+              <span style="user-select: auto;">{item.title}.{item.extention}</span>
+            </div>
+            <div class="slds-col slds-large-size_3-of-12 slds-medium-size_1-of-12 slds-size_1-of-12" style="user-select: auto;">
+              <span style="user-select: auto;"><lightning-formatted-Number maximum-fraction-digits="2" value={item.size} ></lightning-formatted-Number>kb</span>
+            </div>
+            <div class="slds-col slds-large-size_2-of-12 slds-medium-size_1-of-12 slds-size_1-of-12" style="user-select: auto;">
+              <span style="user-select: auto;"><a href={item.url} download>Download</a></span>
+            </div>
+            <div class="slds-col slds-large-size_2-of-12 slds-medium-size_1-of-12 slds-size_1-of-12" style="user-select: auto;">
+              <span style="user-select: auto;"><lightning-button data-id={item.Id} variant="Destructive" value="Delete" label="Delete" onclick={deleteHandler} ></lightning-button></span>
+            </div>
+            
+          </div>
+
+    </template>
+  </lightning-card>
+</template>

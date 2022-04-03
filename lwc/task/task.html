@@ -1,0 +1,44 @@
+<template>
+    <lightning-card title="Account-Contact" style="margin: 15px;">
+    <lightning-input placeholder="Search Account " value={searchAccount} onchange={changeHandler}></lightning-input>
+    
+    <!-- -->
+            <h1><b>Accounts</b></h1>
+            <div style="padding: 10px;height: 200px;overflow:scroll;">
+     <table class="slds-table slds-table_cell-buffer slds-table_bordered" aria-labelledby="element-with-table-label other-element-with-table-label">
+        <thead>
+          <tr class="slds-line-height_reset">
+            <th class="" scope="col">
+              <div class="slds-truncate" title="Opportunity Name">Account Id</div>
+            </th>
+            <th class="" scope="col">
+              <div class="slds-truncate" title="Account Name">Account Name</div>
+            </th>           
+          </tr>
+        </thead>
+        <tbody>
+    <template for:each={accountRecords} for:index="index" for:item="item">
+      
+          <tr  id={index}    class="slds-hint-parent"  key={item.id} >
+          
+            <td  data-label="Account Name">
+                <div  class="slds-truncate" title={index}>   <button class="slds-button" value={index} onclick={handleRowAction}> {item.Id}</button></div>
+            </td>
+            <td  data-label="Close Date">
+                <div class="slds-truncate" title={index}>   <button class="slds-button" value={index} onclick={handleRowAction}>{item.Name}</button></div>
+            </td>
+                      
+          </tr>
+        
+        </template>
+        </tbody>
+      </table>
+      </div>
+      <div style="padding: 40px;height:200px" >
+      <h1>Related Contacts </h1>
+          <lightning-datatable  title="Related Contacts"  key-field="Id"  data={contactRecords} columns={contactCols} hide-checkbox-column
+          draft-values={draftValues}
+          onsave={handleSave}></lightning-datatable></div>
+    </lightning-card>
+
+</template>

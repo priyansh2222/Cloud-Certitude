@@ -1,0 +1,15 @@
+<template>
+   <lightning-card >
+        <lightning-record-edit-form
+        object-api-name= "Account"   
+        record-id={accountId}     
+        columns = "1"
+         onsuccess={handleSuccess}
+        >
+        <lightning-input-field field-name="Name" value={record.Name} ></lightning-input-field>
+        <lightning-input-field field-name="Type" value={record.Type} ></lightning-input-field>
+        <lightning-input-field field-name="BillingCity" value={record.BillingCity} ></lightning-input-field>
+        <lightning-input-field field-name="BillingState" value={record.BillingState} ></lightning-input-field>
+        </lightning-record-edit-form>
+    </lightning-card>
+</template>

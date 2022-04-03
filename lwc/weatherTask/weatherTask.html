@@ -1,0 +1,15 @@
+<template>
+    <lightning-card title="Weather Info" style="margin: 10px;" >
+        <lightning-input type="search" placeholder="Enter the City Name " value={city} onchange={cityHandler} ></lightning-input><br/>
+        <lightning-button variant="brand" label="Get Details" style="padding-top:10px;" onclick={fetchDetails} ></lightning-button>
+        <br/>
+        <template if:true={isData}> 
+          <p style="padding-left: 40%;"></p> <img height="80px" width="80px"  src={imgsrc} /> </p>
+            <table>               
+                <tr><td>Weather</td><td>{weather}</td></tr>
+                <tr><td>tempreture</td><td>{wdata.main.temp}'C</td></tr>
+            </table>
+        </template>
+        <a >Visit W3Schools.com!</a>
+    </lightning-card>
+</template>

@@ -1,0 +1,16 @@
+<template>
+    <lightning-card title="Chat bot" icon-name="utility:comments">
+        <div style="padding: 20px;height:300px;overflow-y:scroll;background-color: rgba(0, 0, 255, 0.158);" >
+        <template  for:each={chat} for:item="item" >
+            <div key={item.answer} >
+                <p style="text-align: right;font-size:15px;padding-right:10px"> <lightning-badge label={item.question} ></lightning-badge>  </p><br/>                   
+                  <p style="text-align: left;font-size:15px;padding-left:10px">  <lightning-badge label={item.answer} ></lightning-badge> </p><br/>                    
+            </div>
+        </template></div>
+        <lightning-input placeholder="Enter Message" onchange={changeHandler} value={newMessage} >
+
+        </lightning-input>
+        <lightning-button label="send" onclick={onclickHandler} ></lightning-button>
+       
+    </lightning-card>
+</template>
